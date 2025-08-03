@@ -47,6 +47,8 @@
                 <li>este optim pentru scripturi de procesare de date("data pipelines"), pentru computare matematică și
                     flow-uri de execuție liniare.
                 </li>
+                <li>Flow ul de execuție este mai explicit, mai ușor de urmărit și astfel mai ușor de făcut debug.
+                </li>
             </ul>
             <p><i class="fa-solid fa-exclamation text-2xl text-red-600"></i>&nbsp;OOP-ul a fost conceput pentru a se
                 adresa la aceste <b>"pain points"</b> din paradigna programării procedurale.</p>
@@ -66,7 +68,8 @@
                 <li>este optim pentru crearea de aplicații medii și mari cu multe interacțiuni și pentru
                     realizarea de librării.
                 </li>
-
+                <li>oop permite să faci blackbox și whitebox la teste unitare.
+                </li>
             </ul>
             <h4 class="text-xl text-red-800 mt-10">Dezavantaje la programarea procedurală și OOP</h4>
 
@@ -112,6 +115,11 @@
             <p><i class="fa-solid fa-exclamation text-2xl text-red-600"></i>&nbsp;Precum programarea procedurală are
                 limitările ei tot la fel și programarea OOP vine cu setul său de complexități. În primul rând nu toate limbajele de
                 programare au suport pentru el și nu prea are sens în programe mici sau scripturi. Folosirea "instrumentului potrivit" pentru task face toată diferența.</p>
+         <div class="flex items-center justify-start my-5 gap-5">
+             @include('partials._link_btn',['title'=>'Exemplu de programare procedurală','route'=>'procedural-example'])
+             @include('partials._link_btn',['title'=>'Exemplu de OOP','route'=>'oop-exampl'])
+
+         </div>
         </x-important_box>
     </div>
 </x-layout>

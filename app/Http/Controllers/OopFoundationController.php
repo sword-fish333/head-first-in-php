@@ -10,4 +10,9 @@ class OopFoundationController extends Controller
     {
         return view('oop_fundamentals');
     }
+
+    public function proceduralExample()
+    {
+        return view('procedural_example');
+    }
 }
