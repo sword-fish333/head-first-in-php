@@ -16,11 +16,12 @@ Author: Left4code
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{config('app.name')}}</title>
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('css/custom.css')}}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/styles/default.min.css">
 
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
@@ -50,6 +51,9 @@ Author: Left4code
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"
         integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.11.1/languages/php.min.js"></script>
+
 <!-- END: JS Assets-->
 <script>
 
@@ -58,7 +62,49 @@ Author: Left4code
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+    $(document).ready(function () {
+        // first, find all the div.code blocks
+        document.querySelectorAll('.code-snippet').forEach(el => {
+            // then highlight each
+            hljs.highlightElement(el);
+        });
+    })
+    // Global function to copy code to clipboard
+    function copyCode(btn) {
+        const code = $(btn).closest('div').children('.code-snippet').first();
+        const text = code.text().replace(/^\s*/, '').replace(/\s*$/, '');
 
+        navigator.clipboard.writeText(text).then(() => {
+            const icon =$( btn.querySelector('.material-symbols-outlined'));
+            // Visual feedback
+            btn.classList.add('copy-success');
+            icon.text( 'check_small');
+
+            // Reset after 700ms
+            setTimeout(() => {
+                btn.classList.remove('copy-success');
+                icon.text('content_copy');
+            }, 700);
+        }).catch(() => {
+            // Fallback for older browsers
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            // Visual feedback
+            const icon =$( btn.querySelector('.material-symbols-outlined'));
+
+            btn.classList.add('copy-success');
+            icon.text('check_small');
+
+            setTimeout(() => {
+                btn.classList.remove('copy-success');
+                icon.text('content_copy');
+            }, 700);
+        });
+    }
 </script>
 {!! $js ??'' !!}
 <script src="{{asset('js/actions.js')}}"></script>

@@ -11,8 +11,8 @@ class OopFoundationController extends Controller
         return view('oop_fundamentals');
     }
 
-    public function proceduralExample()
+    public function deepDiveProcedural()
     {
-        return view('procedural_example');
+        return view('deep_dive_procedural/index');
     }
 }

@@ -1,8 +1,8 @@
 
 .code-snippet{
     display: block;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    background: #fff!important;
+    border: 1px solid grey;
     border-radius: 6px;
     padding: 1rem;
     font-family: 'Courier New', monospace;
@@ -10,4 +10,16 @@
     line-height: 1.5;
     overflow-x: auto;
     white-space: pre;
+}
+.copy-btn {
+    transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+    transform: scale(1.1);
+}
+
+.copy-success {
+    background-color: #10b981 !important;
+    color: white !important;
 }

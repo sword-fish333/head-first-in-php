@@ -7,5 +7,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('oop-foundation',[OopFoundationController::class,'index']);
-Route::get('procedural-example',[OopFoundationController::class,'proceduralExample']);
+Route::get('deep-dive-procedural',[OopFoundationController::class,'deepDiveProcedural']);
 Route::get('oop-example',[OopFoundationController::class,'oopExample']);

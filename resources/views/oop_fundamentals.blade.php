@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="container mx-auto pt-10">
+    <div class="container mx-auto py-10">
         <h1 class="text-4xl font-semibold text-blue-950 underline text-center mb-10">Concepte fundamentale în OOP</h1>
         <x-info_box>
             Programarea orientată pe obiect reprezintă o schimbare fundamentală în paradigma de gândire a software-ului.
@@ -116,7 +116,7 @@
                 limitările ei tot la fel și programarea OOP vine cu setul său de complexități. În primul rând nu toate limbajele de
                 programare au suport pentru el și nu prea are sens în programe mici sau scripturi. Folosirea "instrumentului potrivit" pentru task face toată diferența.</p>
          <div class="flex items-center justify-start my-5 gap-5">
-             @include('partials._link_btn',['title'=>'Exemplu de programare procedurală','route'=>'procedural-example'])
+             @include('partials._link_btn',['title'=>'Deep dive in programare procedurală','route'=>'deep-dive-procedural'])
              @include('partials._link_btn',['title'=>'Exemplu de OOP','route'=>'oop-exampl'])
 
          </div>
