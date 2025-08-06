@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    <link href="{{asset('images/z0_logo.jpg')}}" rel="shortcut icon">
     <title>{{config('app.name')}}</title>
 
     <!-- Fonts -->
@@ -94,7 +94,7 @@
                                             </span>
                                         </span>
                                 <span>
-                                            <a href="{{ $link['link'] }}" target="_blank" class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433]">
+                                            <a href="{{ $link['link'] }}"  class="inline-flex items-center space-x-1 font-medium underline underline-offset-4 text-[#f53003] dark:text-[#FF4433]">
                                                 <span>{{ $link['page'] }}</span>
                                                 @include('partials._link_icon')
                                             </a>

@@ -107,7 +107,7 @@ Author: Left4code
     }
 </script>
 {!! $js ??'' !!}
-<script src="{{asset('js/actions.js')}}"></script>
+<script src="{{asset('js/general.js')}}"></script>
 
 </body>
 </html>

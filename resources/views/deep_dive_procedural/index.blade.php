@@ -1,6 +1,7 @@
 <x-layout>
     <div class="container mx-auto py-10">
-        <x-page_header backRoute="{{str_contains(url()->previous(),'oop-foundation')?'/oop-foundation':'/'}}" title="Programare procedurală"/>
+        <x-page_header backRoute="{{str_contains(url()->previous(),'oop-foundation')?'/oop-foundation':'/'}}"
+                       title="Programare procedurală"/>
         <x-info_box>
             Programarea procedurală organizează codul ca o colecție de funcții care operează cu date, având o abordare
             <b>pas cu pas</b> la rezolvarea de probleme.
@@ -16,14 +17,14 @@
         @include('deep_dive_procedural.partials.example1')
         <x-important_box>
             <h4>Concepte fundamentale de programare procedurală</h4>
-            <ul class="list-disc pl-5">
+            <x-list>
                 <li>compunearea de funcții: reprezintă logică sofisticată de transformare a datelor fără ierarhii de
                     obiecte. Funcțiile de ordin superior pot crea lanțuri de procesare reutilizabile care transformă
                     datele prin mai multe etape.
                 </li>
                 <li>state management</li>
                 <li>arhitectură modulară</li>
-            </ul>
+            </x-list>
         </x-important_box>
         <x-important_box>
             <p>Compunerea de funcții presupune separearea logicii flow-ului de execuție în funcții mai simple și
@@ -184,7 +185,8 @@
                     boolean. PHP-ul procedural modern folosește <b>blocuri try-catch</b>, ierarhii de excepții specifice
                     și înregistrarea erorilor cu păstrarea contextului pentru a asigura o gestionare robustă a erorilor.
                 </li>
-                <li>Funcțiile ar trebui să primească toate <b>dependențele ca parametrii</b> și să nu se bazeze pe variabile
+                <li>Funcțiile ar trebui să primească toate <b>dependențele ca parametrii</b> și să nu se bazeze pe
+                    variabile
                     globale. <b>Trebuie eliminate dependențele globale</b> astfel funcțiile sunt mai ușor de testat și
                     sunt mai predictibile. Configurările, parametrii, serviciile și alte dependențe trebuie să fie date
                     de intrare explicite ale funcțiilor nu parametrii globali accesați din interiorul funcțiilor.

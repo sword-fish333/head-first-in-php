@@ -26,7 +26,7 @@ class HomeController extends Controller
             [
                 'name' => 'Laravel',
                 'links' => [
-                    ['link' => '/laravel-basics', 'page' => 'Laravel Basics'],
+                    ['link' => '/service-container', 'page' => 'Service container'],
                     ['link' => '/eloquent-orm', 'page' => 'Eloquent ORM'],
                 ]
             ],

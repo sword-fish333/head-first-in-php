@@ -1,4 +1,6 @@
-<div class="relative">
+@props(['class' => ''])
+
+<div class="relative {{ $class }}">
     <!-- Top Right Copy Button -->
     <button onclick="copyCode(this)"
             class="cursor-pointer copy-btn absolute top-2 right-2 bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-md shadow-md z-10 flex items-center justify-center">
