@@ -44,6 +44,13 @@ class HomeController extends Controller
                     ['link' => '/structural-patterns', 'page' => 'Structural Patterns'],
                 ]
             ],
+            [
+                'name' => 'Baze de date',
+                'links' => [
+                    ['link' => '/acid', 'page' => 'Principiile ACID'],
+                    ['link' => '/structural-patterns', 'page' => 'Structural Patterns'],
+                ]
+            ],
         ];
         $activeTab = 0; // Default active tab
         return [$tabs,$activeTab];

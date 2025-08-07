@@ -45,7 +45,11 @@ Author: Left4code
 
     <!-- END: Head -->
 <body  class="py-5 md:py-0 bg-black/[0.05] dark:bg-transparent">
-
+<!-- Tooltip container (single instance) -->
+<div id="tooltip" class="tooltip fixed z-50 opacity-0 pointer-events-none max-w-xs bg-gray-800 text-white text-sm rounded-lg p-3 shadow-lg">
+    <div class="tooltip-content"></div>
+    <div class="tooltip-arrow absolute w-2 h-2 bg-gray-800 transform rotate-45"></div>
+</div>
 {{$slot}}
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"

@@ -12,7 +12,7 @@
         <section id="definition" class="scroll-mt-20">
             <x-important_box>
                 În php un <b>container de servicii</b> e un obiect care gestionează dependențele în o aplicație. Se
-                mai numește și conatainer de <b>injecție a dependențelor</b>.
+                mai numește și container de <b>injecție a dependențelor</b>.
                 <x-list_title title="Scopul său:"/>
                 <x-list>
                     <li>face bind în contextul global al aplicației la dependențe

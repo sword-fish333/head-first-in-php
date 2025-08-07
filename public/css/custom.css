@@ -23,3 +23,21 @@
     background-color: #10b981 !important;
     color: white !important;
 }
+
+.tooltip {
+    transition: opacity 0.2s ease-in-out, transform 0.2s ease-in-out;
+    transform: translateY(-5px);
+}
+.tooltip.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+.extra-info {
+    cursor: help;
+    position: relative;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.extra-info:hover {
+    text-decoration: underline;
+}
