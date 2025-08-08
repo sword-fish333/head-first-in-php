@@ -6,7 +6,7 @@
         <ul class="space-y-2" id="toc-list">
             @foreach($sections as $section)
                 <li><a href="#{{$section['section_id']}}"
-                       class="toc-link block py-2 px-3 text-sm text-gray-700 hover:text-blue-600 hover:bg-blue-50 rounded transition-colors">{{$section['section_name']}}</a>
+                       class="toc-link block py-2 px-3 text-sm text-gray-700 hover:text-gray-600 hover:bg-red-50 rounded transition-colors">{{$section['section_name']}}</a>
                 </li>
             @endforeach
         </ul>

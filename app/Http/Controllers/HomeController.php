@@ -48,7 +48,7 @@ class HomeController extends Controller
                 'name' => 'Baze de date',
                 'links' => [
                     ['link' => '/acid', 'page' => 'Principiile ACID'],
-                    ['link' => '/structural-patterns', 'page' => 'Structural Patterns'],
+                    ['link' => '/cap-theorem', 'page' => 'Teorema CAP'],
                 ]
             ],
         ];

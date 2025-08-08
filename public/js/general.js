@@ -16,15 +16,15 @@ function updateActiveSection() {
 
     sections.forEach(section => {
         const rect = section.getBoundingClientRect();
-        if (rect.top <= 100 && rect.bottom >= 100) {
+        if (rect.top <= 100 && rect.bottom >= 150) {
             currentSection = section.getAttribute('id');
         }
     });
 
     tocLinks.forEach(link => {
-        link.classList.remove('bg-blue-100', 'text-blue-600', 'font-semibold');
+        link.classList.remove('bg-rose-100', 'text-gray-600', 'font-semibold');
         if (link.getAttribute('href') === '#' + currentSection) {
-            link.classList.add('bg-blue-100', 'text-blue-600', 'font-semibold');
+            link.classList.add('bg-rose-100', 'text-gray-600', 'font-semibold');
         }
     });
 }
