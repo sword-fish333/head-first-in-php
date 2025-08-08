@@ -11,7 +11,7 @@ class SOLIDController extends Controller
 
         view()->share('sections', [
             ['section_id' => 'definition', 'section_name' => 'Definiție'],
-
+            ['section_id' => 'single_responsibility', 'section_name' => 'Principiul responsabilității unice'],
         ]);
         return view('solid_principles.index');
     }

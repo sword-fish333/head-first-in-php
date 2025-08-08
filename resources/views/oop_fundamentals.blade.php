@@ -43,7 +43,7 @@
 
             <!-- Conceptual Differences Section -->
             <section id="differences" class="scroll-mt-20">
-                <h4 class="text-xl text-red-800 font-semibold mb-4">Diferențe conceptuale fundamentale:</h4>
+                <x-main_title class="mb-4" title="Diferențe conceptuale fundamentale:"/>
                 <div class="space-y-4">
                     <div>
                         <p class="font-semibold underline decoration-1 underline-offset-2">Programarea procedurală</p>
