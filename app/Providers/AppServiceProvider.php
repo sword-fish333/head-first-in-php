@@ -7,6 +7,7 @@ use App\Services\ConcreteImplementation1;
 use App\Services\ConcreteImplementation2;
 use http\Exception\InvalidArgumentException;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->app->bind(AbstractContractInterface::class, function ($app) {
+        $this->app->bind(AbstractContractInterface::class, function () {
             return match(request()->path()) {
                 'concrete-implementation-1' => new ConcreteImplementation1(),
                 'concrete-implementation-2' => new ConcreteImplementation2('some_data'),
@@ -29,6 +30,5 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
     }
 }

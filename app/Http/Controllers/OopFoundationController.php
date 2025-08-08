@@ -22,7 +22,10 @@ class OopFoundationController extends Controller
 
     public function deepDiveProcedural()
     {
-
+        $sections = [
+            ['section_id' => 'definition', 'section_name' => 'Definiție'],
+        ];
+        view()->share('sections', $sections);
         return view('deep_dive_procedural/index');
     }
 

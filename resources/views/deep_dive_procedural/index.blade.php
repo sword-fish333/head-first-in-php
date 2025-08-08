@@ -1,14 +1,26 @@
 <x-layout>
-    <div class="container mx-auto py-10">
-        <x-page_header backRoute="{{str_contains(url()->previous(),'oop-foundation')?'/oop-foundation':'/'}}"
-                       title="Programare procedurală"/>
-        <x-info_box>
-            Programarea procedurală organizează codul ca o colecție de funcții care operează cu date, având o abordare
-            <b>pas cu pas</b> la rezolvarea de probleme.
-            Programarea procedurală excelează în scenarii care necesită manipularea directă de date. E utilă pentru <b>pipelinuri
-                de manipulare de date</b>, <b>scripturi</b>,
-            <b>API endpoints</b>
-        </x-info_box>
+    <div class="container mx-auto py-10 lg:pl-72">
+        <x-page_header backRoute="/" title="Programare procedurală"/>
+        <section id="definition">
+            <x-info_box>
+                <x-definition>
+                    Programarea procedurală în PHP este un paradigm de programare care organizează codul sub forma unor
+                    secvențe de instrucțiuni și apeluri de funcții, unde fluxul execuției este determinat de pași logici
+                    ce manipulează date. Codul este structurat în funcții și proceduri, fără a se pune accent pe
+                    conceptele de obiecte sau clase. Acest stil favorizează o abordare liniară și structurată, în care
+                    datele sunt de obicei stocate global sau transmise între funcții, iar logica aplicației este
+                    împărțită în blocuri funcționale reutilizabile.
+                </x-definition>
+                <x-line/>
+                Programarea procedurală organizează codul ca o colecție de funcții care operează cu date, având o
+                abordare
+                <b>pas cu pas</b> la rezolvarea de probleme.
+                Programarea procedurală excelează în scenarii care necesită manipularea directă de date. E utilă pentru
+                <b>pipelinuri
+                    de manipulare de date</b>, <b>scripturi</b>,
+                <b>API endpoints</b>
+            </x-info_box>
+        </section>
         <x-important_box>
             Spre deosebire de OOP, codul procedural separă datele de funcțiile care le manipulează. Astfel se creează
             flow-uri de execuție liniare care sunt mult mai ușor de urmărit și de făcut debug.

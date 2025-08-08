@@ -1,7 +1,4 @@
 <x-layout>
-    <x-progress_bar/>
-
-    <x-sidebar :sections="$sections"/>
 
     <!-- Main Content -->
     <div class="container mx-auto py-10 lg:pl-72">

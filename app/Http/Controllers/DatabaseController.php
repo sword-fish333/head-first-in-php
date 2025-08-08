@@ -16,8 +16,8 @@ class DatabaseController extends Controller
             ['section_id' => 'durability', 'section_name' => 'Durabilitate - Principiul "Intrării permanente"'],
             ['section_id' => 'interview_questions', 'section_name' => 'Întrebări de interviu'],
         ];
-
-        return view('acid.index', compact('sections'));
+        view()->share('sections', $sections);
+        return view('acid.index');
     }
 
     public function capTheorem()
@@ -32,7 +32,6 @@ class DatabaseController extends Controller
             ['section_id' => 'additional_notes', 'section_name' => 'Detalii adiționale'],
 
         ];
-
         return view('cap_theorem.index', compact('sections'));
     }
 }

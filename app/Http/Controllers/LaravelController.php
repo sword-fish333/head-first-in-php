@@ -21,7 +21,7 @@ class LaravelController extends Controller
             ['section_id' => 'performance_optimisation', 'section_name' => 'Optimizarea de performanțe'],
 
         ];
-
-        return view('service_container.index', compact('sections'));
+        view()->share('sections', $sections);
+        return view('service_container.index');
     }
 }
