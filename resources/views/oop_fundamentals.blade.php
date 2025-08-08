@@ -17,8 +17,8 @@
                 În loc să privim programul ca o serie de funcții care operează cu date, OOP încurajează să modelăm
                 soft-ul după entități din lumea reală și
                 definirea felul în care ele se <b>"comportă" și interacționează</b>. Aceste entități se numesc clase și
-                reprezintă un model abstract al unei entități din realitate. Pentru a se putea lucra cu aceste clase ele
-                trebuie instanțiate în obiecte concrete.
+                reprezintă un model abstract al unei entități din realitate. Pentru a se putea lucra cu aceste <b>clase</b> ele
+                trebuie instanțiate în <b>obiecte concrete</b>.
             </x-info_box>
         </section>
 

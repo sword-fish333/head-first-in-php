@@ -30,8 +30,9 @@ class DatabaseController extends Controller
             ['section_id' => 'fundamental_tradeoff', 'section_name' => 'Compromisul fundamental'],
             ['section_id' => 'practical_implementation', 'section_name' => 'Exemplu de implementare în PHP'],
             ['section_id' => 'additional_notes', 'section_name' => 'Detalii adiționale'],
-
         ];
-        return view('cap_theorem.index', compact('sections'));
+        view()->share('sections', $sections);
+
+        return view('cap_theorem.index');
     }
 }

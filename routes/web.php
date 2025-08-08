@@ -5,6 +5,7 @@ use App\Http\Controllers\OopFoundationController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaravelController;
 use App\Http\Controllers\DatabaseController;
+use App\Http\Controllers\SOLIDController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('oop-foundation', [OopFoundationController::class, 'index']);
@@ -13,6 +14,7 @@ Route::get('oop-example', [OopFoundationController::class, 'oopExample']);
 Route::get('service-container', [LaravelController::class, 'serviceContainer']);
 Route::get('acid', [DatabaseController::class, 'acid']);
 Route::get('cap-theorem',[DatabaseController::class,'capTheorem']);
+Route::get('solid-principles',[SOLIDController::class,'index']);
 Route::get('concrete-implementation-1', function (\App\Services\AbstractContractInterface $binding) {
     dd($binding->handle());
 });

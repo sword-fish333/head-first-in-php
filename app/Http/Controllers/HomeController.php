@@ -17,10 +17,10 @@ class HomeController extends Controller
     {
         $tabs = [
             [
-                'name' => 'PHP fundamentals',
+                'name' => 'Paradigme de programare generale',
                 'links' => [
-                    ['link' => 'oop-foundation', 'page' => 'Concepte fundamentale în OOP'],
-                    ['link' => 'deep-dive-procedural', 'page' => 'Deep dive în programare procedurală'],
+                    ['link' => 'oop-foundation', 'page' => 'OOP'],
+                    ['link' => 'deep-dive-procedural', 'page' => 'Programare procedurală'],
                 ]
             ],
             [
@@ -33,7 +33,7 @@ class HomeController extends Controller
             [
                 'name' => 'SOLID',
                 'links' => [
-                    ['link' => '/solid-principles', 'page' => 'SOLID Principles'],
+                    ['link' => '/solid-principles', 'page' => 'principiile SOLID în detaliu'],
                     ['link' => '/solid-examples', 'page' => 'SOLID Examples'],
                 ]
             ],
