@@ -11,7 +11,8 @@ class SOLIDController extends Controller
 
         view()->share('sections', [
             ['section_id' => 'definition', 'section_name' => 'Definiție'],
-            ['section_id' => 'single_responsibility', 'section_name' => 'Principiul responsabilității unice'],
+            ['section_id' => 'single_responsibility', 'section_name' => 'Principiul responsabilității unice(SRP)'],
+            ['section_id' => 'open_close_principle', 'section_name' => 'Principiul Închis/Deschis(OCP)'],
         ]);
         return view('solid_principles.index');
     }

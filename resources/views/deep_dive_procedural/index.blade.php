@@ -206,4 +206,6 @@
             </ul>
         </x-important_box>
     </div>
+    <x-php-playground-modal />
+
 </x-layout>

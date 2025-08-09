@@ -40,131 +40,7 @@
                     bucătar, și chelner, și contabil în același timp. Fiecare rol are responsabilități specifice, ceea
                     ce face ca întreaga operațiune să fie mai eficientă și mai ușor de gestionat.</p>
 
-                <p class="font-semibold mt-4">Vanilla PHP - exemplu greșit:</p>
-                <x-code_snippet>
-                    // BAD: This class has multiple responsibilities
-                    class User {
-                    private $name;
-                    private $email;
-                    private $db;
-
-                    public function __construct($name, $email) {
-                    $this->name = $name;
-                    $this->email = $email;
-                    $this->db = new PDO('mysql:host=localhost;dbname=app', 'root', '');
-                    }
-
-                    // Responsibility 1: Business logic
-                    public function isValidEmail() {
-                    return filter_var($this->email, FILTER_VALIDATE_EMAIL);
-                    }
-
-                    // Responsibility 2: Database operations
-                    public function save() {
-                    $sql = "INSERT INTO users (name, email) VALUES (?, ?)";
-                    $stmt = $this->db->prepare($sql);
-                    $stmt->execute([$this->name, $this->email]);
-                    }
-
-                    // Responsibility 3: Email sending
-                    public function sendWelcomeEmail() {
-                    $subject = "Welcome!";
-                    $message = "Hello {$this->name}, welcome to our platform!";
-                    mail($this->email, $subject, $message);
-                    }
-
-                    // Responsibility 4: Logging
-                    public function logActivity($action) {
-                    $log = date('Y-m-d H:i:s') . " - User {$this->name} performed: {$action}\n";
-                    file_put_contents('activity.log', $log, FILE_APPEND);
-                    }
-                    }
-                </x-code_snippet>
-                <p class="font-semibold mt-5">Vanilla PHP - exemplu corect:</p>
-                <x-code_snippet>
-                    // GOOD: Each class has a single responsibility
-
-                    // User entity - only holds user data and business rules
-                    class User {
-                    private $name;
-                    private $email;
-
-                    public function __construct($name, $email) {
-                    $this->name = $name;
-                    $this->email = $email;
-                    }
-
-                    public function getName() {
-                    return $this->name;
-                    }
-
-                    public function getEmail() {
-                    return $this->email;
-                    }
-
-                    // Business logic related to the user entity
-                    public function isValidEmail() {
-                    return filter_var($this->email, FILTER_VALIDATE_EMAIL);
-                    }
-                    }
-
-                    // Repository - handles database operations
-                    class UserRepository {
-                    private $db;
-
-                    public function __construct(PDO $db) {
-                    $this->db = $db;
-                    }
-
-                    public function save(User $user) {
-                    $sql = "INSERT INTO users (name, email) VALUES (?, ?)";
-                    $stmt = $this->db->prepare($sql);
-                    $stmt->execute([$user->getName(), $user->getEmail()]);
-                    }
-
-                    public function findById($id) {
-                    // Retrieval logic here
-                    }
-                    }
-
-                    // Email service - handles email sending
-                    class EmailService {
-                    public function sendWelcomeEmail(User $user) {
-                    $subject = "Welcome!";
-                    $message = "Hello {$user->getName()}, welcome to our platform!";
-                    mail($user->getEmail(), $subject, $message);
-                    }
-                    }
-
-                    // Logger - handles logging
-                    class ActivityLogger {
-                    private $logFile;
-
-                    public function __construct($logFile = 'activity.log') {
-                    $this->logFile = $logFile;
-                    }
-
-                    public function log(User $user, $action) {
-                    $log = date('Y-m-d H:i:s') . " - User {$user->getName()} performed: {$action}\n";
-                    file_put_contents($this->logFile, $log, FILE_APPEND);
-                    }
-                    }
-
-                    // Usage - notice how clean and organized this is
-                    $db = new PDO('mysql:host=localhost;dbname=app', 'root', '');
-                    $user = new User('John Doe', 'john@example.com');
-
-                    if ($user->isValidEmail()) {
-                    $repository = new UserRepository($db);
-                    $repository->save($user);
-
-                    $emailService = new EmailService();
-                    $emailService->sendWelcomeEmail($user);
-
-                    $logger = new ActivityLogger();
-                    $logger->log($user, 'registration');
-                    }
-                </x-code_snippet>
+                @include('solid_principles.partials.srp_code_example')
                 <x-section_title class="mt-5" title="Cum implementează Laravel SRP:"/>
                 <p>Laravel implementează în mod elegant principiul SRP prin arhitectura sa. Fiecare componentă are un
                     scop clar și bine definit:</p>
@@ -184,6 +60,71 @@
                 </x-list>
             </x-info_box>
         </section>
+        <section id="open_close_principle" class="scroll-mt-20">
+            <x-info_box>
+                <x-main_title class="mb-4" title="Principiul Închis/Deschis(OCP)"/>
+                <x-definition>
+                    O entitate software (clasă, modul, funcție) ar trebui să fie deschisă la <b>extindere</b>, dar
+                    închisă
+                    la <b>modificare</b>.
+                </x-definition>
+                <x-line/>
+                <p>În arhitectura software, principiul Open/Closed stabilește că structurile de cod existente trebuie să
+                    poată primi funcționalități noi fără a fi nevoie să fie <b>modificate în interior</b>. Extinderea se
+                    realizează prin mecanisme precum moștenire, compoziție, polimorfism sau introducerea de noi
+                    clase/strategii, astfel încât comportamentul existent să rămână stabil și neafectat.</p>
+                <x-example class="mt-5">
+                    Imaginează-ți că ai un modul bine testat și gata pentru producție. Nu ar trebui să fie nevoie să îi
+                    modifici codul sursă de fiecare dată când trebuie să adaugi <b>funcționalități noi</b>. În schimb,
+                    ar
+                    trebui să poți să îl extinzi. E ca și cum ai adăuga aplicații noi pe telefon fără să modifici
+                    sistemul de operare în sine.
+                </x-example>
+                <x-list_title title="Scopul OCP:"/>
+                <x-list>
+                    <li>Să reducă riscul de a introduce erori în cod deja testat.</li>
+                    <li>Să permită evoluția sistemului fără a crea instabilitate.</li>
+                    <li>Să sprijine principiile <b>low coupling și high cohesion.</b></li>
+                </x-list>
+                @include('solid_principles.partials.ocp_code_example')
+                <hr>
+                <x-section_title class="mt-5" title="Cum implementează Laravel OCP:"/>
+                <p>Laravel folosește pe scară largă principiul OCP prin sistemul său de furnizori de servicii, fluxul de
+                    middleware și diversele clase manager.</p>
+                <x-code>
+                    // Laravel's Cache Manager is a perfect example
+                    // You can add new cache drivers without modifying the core
+
+                    // In a service provider
+                    class CustomCacheServiceProvider extends ServiceProvider {
+                    public function boot() {
+                    Cache::extend('mongodb', function ($app) {
+                    return Cache::repository(new MongoDBStore());
+                    });
+                    }
+                    }
+
+                    // Custom cache store implementation
+                    class MongoDBStore implements Store {
+                    public function get($key) {
+                    // MongoDB specific implementation
+                    }
+
+                    public function put($key, $value, $seconds) {
+                    // MongoDB specific implementation
+                    }
+
+                    // Other required methods...
+                    }
+
+                    // Now you can use it without modifying Laravel's core
+                    Cache::store('mongodb')->put('key', 'value', 3600);
+                </x-code>
+            </x-info_box>
+        </section>
     </div>
+
+    <!-- PHP Playground Modal -->
+    <x-php-playground-modal/>
 
 </x-layout>

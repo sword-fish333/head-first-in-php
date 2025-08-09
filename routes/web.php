@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LaravelController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\SOLIDController;
+use App\Http\Controllers\CodeExecutionController;
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('oop-foundation', [OopFoundationController::class, 'index']);
@@ -22,3 +23,6 @@ Route::get('concrete-implementation-2', function (\App\Services\AbstractContract
 
     dd($binding->handle());
 });
+
+// PHP Playground API endpoint
+Route::post('api/execute-code', [CodeExecutionController::class, 'execute']);
