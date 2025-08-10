@@ -7,7 +7,7 @@ use App\Http\Controllers\LaravelController;
 use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\SOLIDController;
 use App\Http\Controllers\CodeExecutionController;
-
+use App\Http\Controllers\DesignPatternsController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('oop-foundation', [OopFoundationController::class, 'index']);
 Route::get('deep-dive-procedural', [OopFoundationController::class, 'deepDiveProcedural']);
@@ -16,6 +16,7 @@ Route::get('service-container', [LaravelController::class, 'serviceContainer']);
 Route::get('acid', [DatabaseController::class, 'acid']);
 Route::get('cap-theorem',[DatabaseController::class,'capTheorem']);
 Route::get('solid-principles',[SOLIDController::class,'index']);
+Route::get('design-patterns',[DesignPatternsController::class,'index']);
 Route::get('concrete-implementation-1', function (\App\Services\AbstractContractInterface $binding) {
     dd($binding->handle());
 });

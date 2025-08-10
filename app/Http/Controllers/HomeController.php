@@ -40,7 +40,7 @@ class HomeController extends Controller
             [
                 'name' => 'Design patterns',
                 'links' => [
-                    ['link' => '/creational-patterns', 'page' => 'Creational Patterns'],
+                    ['link' => '/design-patterns', 'page' => 'Pregătire de interviu'],
                     ['link' => '/structural-patterns', 'page' => 'Structural Patterns'],
                 ]
             ],
