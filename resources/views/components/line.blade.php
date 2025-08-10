@@ -1,1 +1,1 @@
-<hr class="my-3">
+<hr class="my-3 border-gray-400">

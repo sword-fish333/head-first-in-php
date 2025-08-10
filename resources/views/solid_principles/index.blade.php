@@ -14,7 +14,7 @@
                     principii au fost introduse de Robert C. Martin (Uncle Bob) și au devenit fundamentale pentru o
                     arhitectură software bună. Sunt principii care ajută la evitarea erorilor
                     comune în designul software, previne <b>"spaghetti code"</b> și ajută la dezvoltarea unui software
-                    robust și scalabil.</p>
+                    <b>robust și scalabil</b>.</p>
                 <x-definition class="mt-5">
                     Principiile SOLID reprezintă un set de cinci reguli fundamentale de <b>software orientat pe
                         obiect</b>,
@@ -39,7 +39,14 @@
                 <p>Gândește-te la asta ca la o bucătărie de restaurant – nu ai vrea ca aceeași persoană să fie și
                     bucătar, și chelner, și contabil în același timp. Fiecare rol are responsabilități specifice, ceea
                     ce face ca întreaga operațiune să fie mai eficientă și mai ușor de gestionat.</p>
-
+                <x-important_info class="mt-5">
+                    Evită clase <span class="extra-info"
+                                      data-info='Un "God object" este un obiect din cod care concentrează prea multe responsabilități și cunoștințe despre sistem, încălcând
+                                      principiul Single Responsibility din SOLID. În PHP (și alte limbaje OOP), acesta apare când o singură clasă gestionează logică de domeniu,
+                                      acces la date, validări, prezentare și alte funcții, devenind un punct central greu de întreținut și testat.'>„God Object”</span>
+                    care fac prea multe lucruri, ceea ce duce la cod greu de testat și
+                    întreținut.
+                </x-important_info>
                 @include('solid_principles.partials.srp_code_example')
                 <x-section_title class="mt-5" title="Cum implementează Laravel SRP:"/>
                 <p>Laravel implementează în mod elegant principiul SRP prin arhitectura sa. Fiecare componentă are un
@@ -81,6 +88,7 @@
                 </x-example>
                 <x-list_title title="Scopul OCP:"/>
                 <x-list>
+                    <li>Să adăugi funcționalități noi fără să modifici codul existent.</li>
                     <li>Să reducă riscul de a introduce erori în cod deja testat.</li>
                     <li>Să permită evoluția sistemului fără a crea instabilitate.</li>
                     <li>Să sprijine principiile <b>low coupling și high cohesion.</b></li>
@@ -109,6 +117,11 @@
                     neașteptate și
                     fără a încălca logica stabilită de tipul părinte.
                 </x-important_info>
+                <x-line/>
+                <x-important_info>
+                    Clasele derivate trebuie să păstreze contractul clasei părinte.
+                </x-important_info>
+
                 <x-example class="mt-5">
                     Gândește-te în felul următor: dacă ai o telecomandă care funcționează cu orice televizor, atunci
                     orice marcă specifică de televizor (Samsung, LG, Sony) ar trebui să funcționeze cu acea telecomandă
@@ -121,6 +134,28 @@
                     folosită în locul lui Pasăre fără ca programul să se comporte incorect. O subclasă Pinguin care nu
                     poate zbura ar încălca LSP dacă este folosită acolo unde se așteaptă ca toate păsările să zboare.
                 </x-example>
+                <x-list_title title="Scopul LSP:"/>
+                <x-list>
+                    <li><b>Respectarea contractului:</b>&nbsp;<b>clasele derivate</b> trebuie să îndeplinească
+                        așteptările definite de clasa părinte.
+                    </li>
+                    <li><b>Menținerea comportamentului:</b>&nbsp;metodele suprascrise nu trebuie să modifice sensul sau
+                        efectul așteptat al operațiilor.
+                    </li>
+                    <li><b>Evita efecte secundare neașteptate:</b>&nbsp;comportamentul derivatelor nu trebuie să rupă
+                        logica codului client.
+                    </li>
+                    <li><b>Compatibilitate tipologică:</b>&nbsp;instanțele derivate trebuie să poată fi folosite în
+                        locul celor părinte fără adaptări suplimentare.
+                    </li>
+                    <li><b>Îmbunătățirea extensibilității:</b>&nbsp;facilitează adăugarea de noi tipuri fără a afecta
+                        codul existent.
+                    </li>
+                    <li><b>Reducerea riscului de erori:</b>&nbsp; previne comportamentele incorecte atunci când se
+                        substituie tipurile.
+                    </li>
+
+                </x-list>
                 @include('solid_principles.partials.lsp_example')
                 <hr>
                 @include('solid_principles.partials.laravel_lsp_example')
@@ -144,15 +179,42 @@
                     versatil, nu ai vrea să porți unul care are 100 de unelte când ai nevoie doar de o lamă și o
                     șurubelniță. În schimb, ai prefera unelte mai mici, focalizate.
                 </x-example>
-                <x-example class="mt-5">
-                    Dacă ai o clasă <b>Pasăre</b> cu metoda <b>zboară()</b>, orice subclasă (de exemplu Rândunică)
-                    trebuie să poată fi
-                    folosită în locul lui Pasăre fără ca programul să se comporte incorect. O subclasă Pinguin care nu
-                    poate zbura ar încălca LSP dacă este folosită acolo unde se așteaptă ca toate păsările să zboare.
-                </x-example>
+                <x-list_title title="Scopul ISP:"/>
+                <x-list>
+                    <li><b>Separarea responsabilităților: </b> fiecare interfață trebuie să definească un set restrâns
+                        și coerent de funcționalități. Evită <span class="extra-info"
+                                                                   data-info='O interfață „gremlin” (termen neoficial) este o interfață supradimensionată,
+                                               cu prea multe metode, care forțează clasele implementatoare să
+                                               definească funcționalități inutile sau necorelate, încălcând Interface Segregation Principle din SOLID.'>interfețe „gremline”</span>
+                        cu prea multe metode.
+                    </li>
+                    <li><b>Reducerea dependențelor inutile: </b>clasele nu trebuie să fie obligate să implementeze
+                        metode de care nu au nevoie.
+                    </li>
+                    <li><b>Creșterea clarității și lizibilității codului: </b> interfețele mici sunt mai ușor de înțeles
+                        și întreținut.
+                    </li>
+                    <li><b>Facilitarea testării unitare: </b> interfețele specifice reduc complexitatea mock-urilor și
+                        stub-urilor.
+                    </li>
+                    <li><b>Îmbunătățirea flexibilității arhitecturii: </b> modificările într-o interfață nu afectează
+                        inutil implementările care nu sunt relevante.
+                    </li>
+                    <li><b>Susținerea principiului Single Responsibility: </b> fiecare interfață acoperă o singură zonă
+                        funcțională.
+                    </li>
+                </x-list>
                 @include('solid_principles.partials.isp_example')
                 <hr>
                 @include('solid_principles.partials.laravel_isp_example')
+                <x-section_title class="mt-5" title="Cum implementează Laravel ISP:"/>
+                <x-list>
+                    <li>În loc să creeze o singură interfață mare("gremlin") pentru toate operațiile pe date, Laravel
+                        folosește interfețe mici, fiecare având un scop clar.
+                    </li>
+                    <li>Creează mai multe interfețe mici (Repository, Caching, Logging) în loc de una „all-in-one”.</li>
+                </x-list>
+
             </x-info_box>
         </section>
         <section id="dependency_inversion" class="scroll-mt-20">
@@ -165,13 +227,32 @@
                     (implementări concrete), detaliile trebuie să depindă de abstracții.
                 </x-definition>
                 <x-line/>
-                <x-example >
+                <x-example>
                     Gândește-te ca la prizele electrice din casa ta. Laptopul tău (nivel înalt) nu se conectează direct
                     în sistemul electric al casei tale (nivel scăzut). În schimb, ambele depind de o interfață standard
                     - specificația prizei și a ștecherului. Poți conecta orice dispozitiv compatibil în orice priză
                     compatibilă.
                 </x-example>
-
+                <x-list_title title="Scopul DIP:"/>
+                <x-list>
+                    <li>Reduci coupling-ul și crești flexibilitatea.
+                    </li>
+                    <li><b>Reducerea dependențelor inutile: </b>clasele nu trebuie să fie obligate să implementeze
+                        metode de care nu au nevoie.
+                    </li>
+                    <li><b>Creșterea clarității și lizibilității codului: </b> interfețele mici sunt mai ușor de înțeles
+                        și întreținut.
+                    </li>
+                    <li><b>Facilitarea testării unitare: </b> interfețele specifice reduc complexitatea mock-urilor și
+                        stub-urilor.
+                    </li>
+                    <li><b>Îmbunătățirea flexibilității arhitecturii: </b> modificările într-o interfață nu afectează
+                        inutil implementările care nu sunt relevante.
+                    </li>
+                    <li><b>Susținerea principiului Single Responsibility: </b> fiecare interfață acoperă o singură zonă
+                        funcțională.
+                    </li>
+                </x-list>
                 @include('solid_principles.partials.dip_example')
                 <hr>
                 @include('solid_principles.partials.laravel_isp_example')

@@ -16,8 +16,10 @@
                 software-ului.
                 În loc să privim programul ca o serie de funcții care operează cu date, OOP încurajează să modelăm
                 soft-ul după entități din lumea reală și
-                definirea felul în care ele se <b>"comportă" și interacționează</b>. Aceste entități se numesc clase și
-                reprezintă un model abstract al unei entități din realitate. Pentru a se putea lucra cu aceste <b>clase</b> ele
+                definirea felul în care ele se <b>"comportă" și interacționează</b>. Aceste entități se numesc
+                <b>clase</b> și
+                reprezintă un model abstract al unei entități din realitate. Pentru a se putea lucra cu aceste
+                <b>clase</b> ele
                 trebuie instanțiate în <b>obiecte concrete</b>.
             </x-info_box>
         </section>
@@ -25,7 +27,7 @@
         <x-important_box>
             <!-- OOP vs Procedural Section -->
             <section id="oop-vs-procedural" class="scroll-mt-20">
-                OOP diferă substanțial de programarea procedurală. În programarea procedurală instrucțiunile sunt
+                OOP diferă substanțial de <b>programarea procedurală</b>. În programarea procedurală instrucțiunile sunt
                 executate
                 liniar, secvențial, pas cu pas. Datele sunt transformate "as you go". Focusul e pe ceea ce trebuie să se
                 întâmple. <b>Este o formă de programare imperativă.</b>
@@ -33,29 +35,28 @@
                 a
                 responsabilităților dintre entități.
                 <br>
-                <hr class="my-5 border-gray-300"/>
+                <x-line/>
                 <b>În programarea procedurală</b>&nbsp;datele sunt separate de funcțiile care operează cu ele.
                 În OOP datele și funcțiile sunt <b>încapsulate</b> la un loc și definesc <b>proprietățile</b> și <b>comportamentul</b>
                 obiectelor.
             </section>
 
-            <hr class="my-5 border-gray-300"/>
-
+            <x-line/>
             <!-- Conceptual Differences Section -->
             <section id="differences" class="scroll-mt-20">
                 <x-main_title class="mb-4" title="Diferențe conceptuale fundamentale:"/>
                 <div class="space-y-4">
                     <div>
-                        <p class="font-semibold underline decoration-1 underline-offset-2">Programarea procedurală</p>
+                        <x-section_title title="Programarea procedurală"/>
                         <ul class="list-disc pl-5 mt-2 space-y-1">
                             <li>este fundamental imperativă</li>
-                            <li>răspunde la întrebarea ce pași ar trebui să fac pentru a rezolva această problemă.</li>
+                            <li>răspunde la întrebarea: ce pași ar trebui să fac pentru a rezolva această problemă?</li>
                         </ul>
                     </div>
                     <div>
-                        <p class="font-semibold underline decoration-1 underline-offset-2 mt-5">OOP</p>
+                        <x-section_title title="OOP"/>
                         <ul class="list-disc pl-5 mt-2 space-y-1">
-                            <li>este declarativ în comparație cu programarea procedurală</li>
+                            <li>este declarativă în comparație cu programarea procedurală</li>
                             <li>pune problema a ceea ce se află la nivel de "problem domain", cum pot fi aceste entități
                                 modelate în
                                 clase. Cum poate fi definit <b>comportamentul</b> claselor în <b>metode</b> și <b>proprietăți</b>.
@@ -70,8 +71,7 @@
 
             <!-- Advantages Section -->
             <section id="advantages" class="scroll-mt-20 mt-10">
-                <h4 class="text-xl text-red-800 font-semibold mb-4">Avantaje la programarea procedurală și OOP</h4>
-
+                <x-subtitle title="Avantaje la programarea procedurală și OOP"/>
                 <div class="mb-6">
                     <p class="font-semibold underline decoration-1 underline-offset-2">Avantaje la programarea
                         procedurală</p>
@@ -81,7 +81,11 @@
                             folosită
                             în toate limbajele de programare.
                         </li>
-                        <li>este optim pentru scripturi de procesare de date("data pipelines"), pentru computare
+                        <li>este optim pentru scripturi de procesare de date("
+
+                            <span class="extra-info"
+                                  data-info='Un data pipeline în programare este un set de procese automate prin care datele sunt preluate dintr-o sursă, transformate după anumite reguli și apoi încărcate într-o destinație. Un data pipeline e format din: Ingestie de date, transformare, încărcare.'>data pipelines</span>"),
+                            pentru computare
                             matematică și
                             flow-uri de execuție liniare.
                         </li>
@@ -94,17 +98,22 @@
                 <x-important_info>
                     OOP-ul a fost conceput pentru
                     a se
-                    adresa la aceste <b>"pain points"</b> din paradigma programării procedurale.
+                    rezolva aceste <b>"pain points"</b> din paradigma programării procedurale.
                 </x-important_info>
 
                 <div>
-                    <p class="font-semibold underline decoration-1 underline-offset-2 mt-2">Avantaje OOP</p>
+                    <x-section_title title="Avantaje OOP" class="mt-4"/>
                     <ul class="list-disc pl-5 mt-2 space-y-1">
-                        <li>Logica fiind încapsulată in clase e mai clară și mai ușor de înțeles la nivel de domain
-                            layer
+                        <li>Logica fiind încapsulată in clase e mai clară și mai ușor de înțeles la nivel de <span
+                                class="extra-info"
+                                data-info="Domain layer reprezintă modelele și logica
+                                de business pură a aplicației, reprezentând conceptele,
+                                regulile și comportamentele domeniului, independent de
+                                infrastructură, interfață sau detalii tehnice.">domain
+                            layer</span>.
                         </li>
                         <li>Fiindcă logica este încapsulată în clase, se respectă <b>"principiul responsabilității
-                                unice"</b>,
+                                unice"(SRP)</b>,
                             astfel dependențele dintre clase sunt mai clare, mai ușor de definit și astfel modificările
                             se pot
                             face mai ușor.
@@ -128,11 +137,11 @@
 
             <!-- Disadvantages Section -->
             <section id="disadvantages" class="scroll-mt-20 mt-10">
-                <h4 class="text-xl text-red-800 font-semibold mb-4">Dezavantaje la programarea procedurală și OOP</h4>
-
+                <x-subtitle title="Dezavantaje la programarea procedurală și OOP"/>
                 <div class="mb-6">
-                    <p class="font-semibold underline decoration-1 underline-offset-2">Dezavantaje la programarea
-                        procedurală</p>
+                    <x-section_title title="Dezavantaje la programarea
+                        procedurală" class="mt-4"/>
+
                     <ul class="list-disc pl-5 mt-2 space-y-2">
                         <li>Odată ce proiectul scalează, granițele dintre entități se estompează. Să găsești funcția
                             necesară
@@ -168,7 +177,8 @@
                 </div>
 
                 <div>
-                    <p class="font-semibold underline decoration-1 underline-offset-2 mt-2">Dezavantaje la OOP</p>
+                    <x-section_title title="Dezavantaje la OOP" class="mt-4"/>
+
                     <ul class="list-disc pl-5 mt-2 space-y-1">
                         <li>Pentru sisteme software simple OOP poate fi "overkill" și dacă designul relațiilor dintre
                             clase nu
