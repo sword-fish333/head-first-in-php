@@ -19,6 +19,8 @@
                     dovedite pentru
                     rezolvarea provocărilor de proiectare.</p>
                 <x-line/>
+                <p>Ele ajută developeri să creeze arhitectură software flexibilă. ușor de extins. În timp ce păstreză un base code lizibil.</p>
+                <x-line/>
                 <p>
                     În PHP, design pattern-urile contează fiindcă îndeamnă scrierea de <b>cod reutilizabil</b>, ușor de
                     întreținut, ușor de extins și nu în ultimul rând, comunicarea eficientă în cadrul echipei de
@@ -83,7 +85,9 @@
                 </x-definition>
                 <x-line/>
                 <p>
-                    Design patternul factory susține <b>principiul Deschis/Închis</b> prin faptul că permite ca noi
+                    Design patternul factory susține <span class="font-bold underline cursor-pointer" onclick="navigateToSection('solid-principles','open_close_principle')">principiul Deschis/Închis&nbsp;<span class="material-symbols-outlined">
+ios_share
+</span></span> prin faptul că permite ca noi
                     tipuri de
                     obiecte
                     să fie adăugate fără modificarea codului actual de creare de obiecte.
@@ -141,6 +145,25 @@
                     clasă? Cel mai des întâlnit motiv pentru aceasta este controlarea accesului la o resursă partajată —
                     de exemplu, o bază de date sau un fișier</p>
                 <x-code_snippet class="mt-5">
+                    class ConfigManager {
+                    private static ?self $instance = null;
+                    private array $config = [];
+
+                    final private function __construct() {
+                    $this->config = $this->loadConfiguration();
+                    }
+
+                    public static function getInstance(): self {
+                    if (self::$instance === null) {
+                    self::$instance = new self();
+                    }
+                    return self::$instance;
+                    }
+
+                    public function get(string $key): mixed {
+                    return $this->config[$key] ?? null;
+                    }
+                    }
                 </x-code_snippet>
             </x-info_box>
         </section>

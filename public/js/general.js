@@ -146,17 +146,17 @@ function openPhpPlayground(btn) {
     const codeContent = playground.querySelector('.code-content');
     const modal = document.getElementById('php-playground-modal');
     const modalEditor = document.getElementById('modal-code-editor');
-    
+
     // Get the original code content
     const code = codeContent.textContent.trim();
-    
+
     // Populate the modal editor
     modalEditor.value = code;
-    
+
     // Show the modal
     modal.classList.remove('hidden');
     document.body.style.overflow = 'hidden';
-    
+
     // Focus on the editor
     setTimeout(() => {
         modalEditor.focus();
@@ -168,7 +168,7 @@ function closePhpPlayground() {
     const modal = document.getElementById('php-playground-modal');
     modal.classList.add('hidden');
     document.body.style.overflow = 'auto';
-    
+
     // Reset modal state
     clearModalResults();
     showInitialState();
@@ -179,17 +179,17 @@ function runModalCode() {
     const runBtn = document.getElementById('modal-run-btn');
     const runIcon = runBtn.querySelector('.material-symbols-outlined');
     const runText = runBtn.querySelector('span:last-child');
-    
+
     // Show loading state
     showLoadingState();
     runIcon.textContent = 'hourglass_empty';
     runText.textContent = 'Running...';
     runBtn.disabled = true;
     runBtn.classList.add('opacity-50');
-    
+
     // Get the code from textarea
     const code = modalEditor.value;
-    
+
     // Send code to server for execution
     fetch('/api/execute-code', {
         method: 'POST',
@@ -238,9 +238,9 @@ function showOutputSection(output, error) {
     document.getElementById('modal-loading-state').classList.add('hidden');
     document.getElementById('modal-output-section').classList.remove('hidden');
     document.getElementById('modal-error-section').classList.add('hidden');
-    
+
     document.getElementById('modal-results-output').textContent = output;
-    
+
     if (error) {
         document.getElementById('modal-error-section').classList.remove('hidden');
         document.getElementById('modal-error-output').textContent = error;
@@ -252,7 +252,7 @@ function showErrorSection(error) {
     document.getElementById('modal-loading-state').classList.add('hidden');
     document.getElementById('modal-output-section').classList.add('hidden');
     document.getElementById('modal-error-section').classList.remove('hidden');
-    
+
     document.getElementById('modal-error-output').textContent = error;
 }
 
@@ -269,12 +269,12 @@ function clearModalEditor() {
 function copyModalCode() {
     const modalEditor = document.getElementById('modal-code-editor');
     const copyBtn = event.target.closest('button');
-    
+
     navigator.clipboard.writeText(modalEditor.value).then(function() {
         // Visual feedback
         copyBtn.innerHTML = '<span class="material-symbols-outlined text-xs">check</span> Copied!';
         copyBtn.classList.add('text-green-600');
-        
+
         setTimeout(() => {
             copyBtn.innerHTML = '<span class="material-symbols-outlined text-xs">content_copy</span> Copy';
             copyBtn.classList.remove('text-green-600');
@@ -288,7 +288,7 @@ function updateLineNumbers() {
     const editor = document.getElementById('modal-code-editor');
     const lineNumbers = document.getElementById('line-numbers');
     const lines = editor.value.split('\n').length;
-    
+
     let numbersHtml = '';
     for (let i = 1; i <= Math.max(lines, 20); i++) {
         numbersHtml += i + '\n';
@@ -299,23 +299,23 @@ function updateLineNumbers() {
 function copyCode(btn) {
     const playground = btn.closest('[data-playground]');
     const codeDisplay = playground.querySelector('.code-snippet');
-    
+
     // Copy from code display (always in view mode now)
     const textToCopy = codeDisplay.textContent;
-    
+
     navigator.clipboard.writeText(textToCopy).then(function() {
         // Visual feedback
         const originalText = btn.querySelector('.material-symbols-outlined').textContent;
         btn.querySelector('.material-symbols-outlined').textContent = 'check';
         btn.classList.add('bg-green-600');
-        
+
         setTimeout(() => {
             btn.querySelector('.material-symbols-outlined').textContent = originalText;
             btn.classList.remove('bg-green-600');
         }, 1500);
     }).catch(function(err) {
         console.error('Failed to copy text: ', err);
-        
+
         // Fallback for older browsers
         const textArea = document.createElement('textarea');
         textArea.value = textToCopy;
@@ -323,12 +323,12 @@ function copyCode(btn) {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
-        
+
         // Visual feedback
         const originalText = btn.querySelector('.material-symbols-outlined').textContent;
         btn.querySelector('.material-symbols-outlined').textContent = 'check';
         btn.classList.add('bg-green-600');
-        
+
         setTimeout(() => {
             btn.querySelector('.material-symbols-outlined').textContent = originalText;
             btn.classList.remove('bg-green-600');
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 closePhpPlayground();
             }
         }
-        
+
         // Run code with Ctrl+Enter
         if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
             const modal = document.getElementById('php-playground-modal');
@@ -356,7 +356,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
     });
-    
+
     // Update line numbers as user types
     const modalEditor = document.getElementById('modal-code-editor');
     if (modalEditor) {
@@ -366,7 +366,7 @@ document.addEventListener('DOMContentLoaded', function() {
             lineNumbers.scrollTop = this.scrollTop;
         });
     }
-    
+
     // Close modal when clicking outside
     const modal = document.getElementById('php-playground-modal');
     if (modal) {
@@ -377,3 +377,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+
+function navigateToSection(route,section){
+    window.open(route+'#'+section);
+}

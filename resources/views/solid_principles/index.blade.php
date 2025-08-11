@@ -69,7 +69,7 @@
         </section>
         <section id="open_close_principle" class="scroll-mt-20">
             <x-info_box>
-                <x-main_title class="mb-4" title="Principiul Închis/Deschis(OCP)"/>
+                <x-main_title class="mb-4" link_section="open_close_principle" title="Principiul Închis/Deschis(OCP)"/>
                 <x-definition>
                     Entitățile software(clasă, modul, funcție) trebuie să fie deschise pentru <b>extindere</b>, dar
                     închise pentru <b>modificare</b>.
