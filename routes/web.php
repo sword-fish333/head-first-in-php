@@ -8,6 +8,7 @@ use App\Http\Controllers\DatabaseController;
 use App\Http\Controllers\SOLIDController;
 use App\Http\Controllers\CodeExecutionController;
 use App\Http\Controllers\DesignPatternsController;
+use App\Http\Controllers\CreationalDesignPatternsController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('oop-foundation', [OopFoundationController::class, 'index']);
 Route::get('deep-dive-procedural', [OopFoundationController::class, 'deepDiveProcedural']);
@@ -17,6 +18,9 @@ Route::get('acid', [DatabaseController::class, 'acid']);
 Route::get('cap-theorem',[DatabaseController::class,'capTheorem']);
 Route::get('solid-principles',[SOLIDController::class,'index']);
 Route::get('design-patterns',[DesignPatternsController::class,'index']);
+Route::get('factory-pattern',[CreationalDesignPatternsController::class,'factoryPattern']);
+Route::get('singleton-pattern',[CreationalDesignPatternsController::class,'singletonPattern']);
+
 Route::get('concrete-implementation-1', function (\App\Services\AbstractContractInterface $binding) {
     dd($binding->handle());
 });

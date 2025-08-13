@@ -2,7 +2,7 @@
 
     <!-- Main Content -->
     <div class="container mx-auto py-10 lg:pl-72">
-        <x-page_header backRoute="/" title="Desigh patterns"/>
+        <x-page_header backRoute="/" title="Introducere în Design patterns"/>
 
 
         <!-- Introduction Section -->
@@ -19,7 +19,8 @@
                     dovedite pentru
                     rezolvarea provocărilor de proiectare.</p>
                 <x-line/>
-                <p>Ele ajută developeri să creeze arhitectură software flexibilă. ușor de extins. În timp ce păstreză un base code lizibil.</p>
+                <p>Ele ajută developeri să creeze arhitectură software flexibilă. ușor de extins. În timp ce păstreză un
+                    base code lizibil.</p>
                 <x-line/>
                 <p>
                     În PHP, design pattern-urile contează fiindcă îndeamnă scrierea de <b>cod reutilizabil</b>, ușor de
@@ -74,102 +75,124 @@
                 </x-list>
             </x-info_box>
         </section>
-        <x-main_title class="mt-4" title="Deisgn patternuri creaționale: soluții pentru instanțierea obiectelor"/>
-
-        <section id="factory_design_patter" class="scroll-mt-20">
+        <section id="origins" class="scroll-mt-20">
             <x-info_box>
-                <x-main_title class="mb-3" title="Factory design pattern"/>
-                <x-definition>
-                    Metoda Factory este un pattern de design creațional care rezolvă problema creării obiectelor
-                    fără a specifica clasele lor concrete.(code to a contract not a concrete implementation)
-                </x-definition>
+                <x-main_title class="mt-4" title="Originile design patternurilor:"/>
+                <p class="indent-5">Design patternurile în ingineria software își au originea în lucrarea revoluționară
+                    a lui
+                    Christopher Alexander din 1977, „A Pattern Language: Towns, Buildings, Construction". Această
+                    lucrare de arhitectură a introdus conceptul revoluționar de captura soluții de proiectare
+                    recurente sub formă de tipare reutilizabile — un cadru care avea să transforme ulterior practicile
+                    de dezvoltare software la nivel mondial.</p>
+                <p class="indent-5">Lucrarea lui Alexander a stabilit structura fundamentală a unui design pattern: o
+                    formulare a problemei,
+                    circumstanțele care creează problema, o soluție care funcționează în acele circumstanțe și legături
+                    către tipare înrudite. Această filozofie arhitecturală a „limbajului tiparelor” — în care tiparele
+                    formează un vocabular interconectat — a influențat direct pionierii timpurii ai informaticii, Ward
+                    Cunningham și Kent Beck, care au început să experimenteze aplicarea acestor concepte în programare
+                    în 1987.</p>
                 <x-line/>
-                <p>
-                    Design patternul factory susține <span class="font-bold underline cursor-pointer" onclick="navigateToSection('solid-principles','open_close_principle')">principiul Deschis/Închis&nbsp;<span class="material-symbols-outlined">
-ios_share
-</span></span> prin faptul că permite ca noi
-                    tipuri de
-                    obiecte
-                    să fie adăugate fără modificarea codului actual de creare de obiecte.
-                </p>
-                <x-line/>
-                <x-important_info>
-                    Metoda Factory definește o metodă care ar trebui folosită pentru crearea obiectelor în locul
-                    apelului direct al constructorului (operatorul <b>new</b>). Subclasele pot suprascrie această metodă
-                    pentru
-                    a schimba clasa obiectelor care vor fi create.
-                </x-important_info>
-                <x-code_snippet class="mt-5">
-                    interface PaymentProcessor {
-                    public function process(float $amount): bool;
-                    }
-
-                    class CreditCardProcessor implements PaymentProcessor {
-                    public function process(float $amount): bool {
-                    return $this->chargeCreditCard($amount);
-                    }
-                    }
-
-                    class PayPalProcessor implements PaymentProcessor {
-                    public function process(float $amount): bool {
-                    return $this->chargePayPal($amount);
-                    }
-                    }
-
-                    class PaymentFactory {
-                    public static function create(string $type): PaymentProcessor {
-                    return match($type) {
-                    'credit_card' => new CreditCardProcessor(),
-                    'paypal' => new PayPalProcessor(),
-                    'bank_transfer' => new BankTransferProcessor(),
-                    default => throw new InvalidArgumentException("Unknown payment type: {$type}")
-                    };
-                    }
-                    }
-                </x-code_snippet>
+                <p class="indent-5">Tranziția formală către ingineria software s-a realizat odată cu publicarea
+                    <b>„Design Patterns:
+                        Elements of Reusable Object-Oriented Software"</b> pe 21 octombrie 1994. Scrisă de <b>„Gang of
+                        four"
+                        (Erich Gamma, Richard Helm, Ralph Johnson și John Vlissides)</b>, această lucrare fundamentală a
+                    catalogat <b>23 de design patternuri</b> de proiectare clasice organizate în categorii creaționale,
+                    structurale și
+                    comportamentale. Cartea a devenit o piatră de temelie a proiectării orientate pe
+                    obiecte, vânzându-se în peste 500.000 de exemplare și câștigând Premiul ACM SIGPLAN pentru Realizări
+                    în Limbaje de Programare în 2005.</p>
+                <p class="indent-5">Aceste modele de design software oferă un vocabular comun între developeri,
+                    permițând comunicarea eficientă despre
+                    decizii complexe de proiectare software. În loc să explice relații arhitecturale complicate,
+                    echipele pot pur
+                    și simplu să facă referire la tiparele „Factory" sau „Observer" pentru a transmite instantaneu
+                    concepte sofisticate de proiectare. Acest limbaj comun a devenit esențial pentru dezvoltarea modernă
+                    de software, în special în mediile colaborative.</p>
             </x-info_box>
         </section>
-        <section id="singleton_design_pattern" class="scroll-mt-20">
+        <section id="php_integration" class="scroll-mt-20">
             <x-info_box>
-                <x-main_title class="mb-3" title="Singleton Pattern"/>
-                <x-definition>
-                    Singleton este un pattern de design creațional care îți permite să te asiguri că o clasă are o
-                    singură instanță, oferind în același timp un punct de acces global la această instanță.
-                </x-definition>
-                <x-line/>
-                <x-important_info>
-                    Este considerat anti-pattern în php ul modern fiindcă este dificl de testat.
-                </x-important_info>
-                <x-section_title class="my-3" title="Singleton rezolvă 2 probleme în același timp:"/>
-                <p>Asigură-te că o clasă are o singură instanță. De ce ar vrea cineva să controleze câte instanțe are o
-                    clasă? Cel mai des întâlnit motiv pentru aceasta este controlarea accesului la o resursă partajată —
-                    de exemplu, o bază de date sau un fișier</p>
-                <x-code_snippet class="mt-5">
-                    class ConfigManager {
-                    private static ?self $instance = null;
-                    private array $config = [];
+                <x-main_title class="mt-4" title="Design patternuri in PHP:"/>
+                <p class="indent-5">Transformarea PHP de la un simplu limbaj procedural la un limbaj de programare
+                    robust orientat
+                    pe obiect a schimbat fundamental modul în care developerii implementează design pattern-uri.
+                    Limbajul a apărut în 1994 ca "Personal Home Page Tools"—binare CGI de bază pentru
+                    a urmări traficul pe pagini web. PHP nu avea absolut nicio capabilitate orientată pe obiect.</p>
+                <p class="indent-5">Punctul de cotitură a venit cu <b>PHP 5.0 în 2004</b>, care a introdus programarea
+                    orientată pe obiecte prin intermediul Zend Engine 2.0. Această versiune a
+                    adus încapsularea corespunzătoare cu <span class="extra-info"
+                                                               data-info='Access modifiers (modificatori de acces) sunt cuvinte cheie care
+                                                               controlează vizibilitatea proprietăților și metodelor unei clase.
+                                                               Ei sunt:
+public - Accesibil de oriunde: din interiorul clasei, din clasele derivate și din exterior,
+protected - Accesibil din clasa curentă și din clasele care o extind (moștenire),
+private - Accesibil doar din interiorul clasei care l-a definit.'>modificatori de vizibilitate(access modifiers)</span>,
+                    clase
+                    abstracte, interfețe și
+                    gestionarea excepțiilor(error handling). Această implementare de OOP corespunzătoare a reprezentat
+                    fundația necesară pentru implementarea eficientă a design pattern-urilor. Anterior, developerii PHP
+                    erau limitați la abordări procedurale care făceau
+                    pattern-urile arhitecturale sofisticate aproape imposibile.</p>
+                <p class="indent-5">Aceste modele de design software oferă un vocabular comun între developeri,
+                    permițând comunicarea eficientă despre
+                    decizii complexe de proiectare software. În loc să explice relații arhitecturale complicate,
+                    echipele pot pur
+                    și simplu să facă referire la tiparele „Factory" sau „Observer" pentru a transmite instantaneu
+                    concepte sofisticate de proiectare. Acest limbaj comun a devenit esențial pentru dezvoltarea modernă
+                    de software, în special în mediile colaborative.</p>
+                <x-section_title class="mt-5"
+                                 title="Caracteristicile moderne ale PHP 7 și 8 au permis implementarea de design pattern-uri mult mai eficientă:"/>
 
-                    final private function __construct() {
-                    $this->config = $this->loadConfiguration();
-                    }
+                <x-list>
+                    <li><b>Namespace-urile (PHP 5.3)</b> au eliminat conflictele de denumire și au permis organizarea
+                        eficientă și clară a
+                        pattern-urilor.
+                    </li>
+                    <li><b>Trait-urile (PHP 5.4)</b> permit reutilizarea codului pe orizontală și rezolvarea
+                        <span class="extra-info"
+                              data-info='Cross-cutting concerns sunt aspecte
+                              ale arhitecturii unui sistem software care afectează multiple module neînrudite între ele. Aceste module nu au nici o relație între ele și nu comunică direct.'>funcționalităților
+                        transversale(cross-cutting concerns)</span>.
+                    </li>
+                    <li><b>Declarațiile de tip(Type declarations) (PHP 7.0)</b> impun contracte în pattern-urile
+                        Strategy și Template Method.
+                    </li>
+                    <li>Atributele (PHP 8.0) permit injecția de dependențe bazată pe adnotări(annotation-driven
+                        dependency injection) și implementări spefice de OOP.
+                    </li>
+                </x-list>
+                <p class="font-semibold mt-4">Exemplu:</p>
 
-                    public static function getInstance(): self {
-                    if (self::$instance === null) {
-                    self::$instance = new self();
-                    }
-                    return self::$instance;
-                    }
+                <x-code_snippet>
+                    // PHP 8 constructor property promotion reduces boilerplate
+                    class OrderService {
+                    public function __construct(
+                    private PaymentProcessor $paymentProcessor,
+                    private EmailService $emailService,
+                    private LoggerInterface $logger
+                    ) {}
 
-                    public function get(string $key): mixed {
-                    return $this->config[$key] ?? null;
+                    public function processOrder(Order $order): OrderResult {
+                    try {
+                    $result = $this->paymentProcessor->process($order->getPayment());
+                    $this->emailService->sendConfirmation($order);
+                    return new OrderResult(true, 'Order processed successfully');
+                    } catch (PaymentException $e) {
+                    $this->logger->error('Payment failed', ['error' => $e->getMessage()]);
+                    return new OrderResult(false, $e->getMessage());
+                    }
                     }
                     }
                 </x-code_snippet>
+                <x-line/>
+                <p>Introducerea <b>Composer și a autoloading-ului PSR-4</b> a îmbunătățit semnificativ gestionarea
+                    dependențelor, făcând
+                    implementările de pattern-uri ușor de împărtășit și de întreținut. Developerii PHP moderni pot acum
+                    implementa design pattern-uri sofisticate cu aceeași eleganță găsită în limbajele tradițional
+                    orientate pe obiecte.</p>
             </x-info_box>
         </section>
     </div>
-
-    <!-- PHP Playground Modal -->
-    <x-php-playground-modal/>
 
 </x-layout>

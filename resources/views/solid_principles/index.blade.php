@@ -260,7 +260,4 @@
         </section>
     </div>
 
-    <!-- PHP Playground Modal -->
-    <x-php-playground-modal/>
-
 </x-layout>

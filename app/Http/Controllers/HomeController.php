@@ -8,8 +8,8 @@ class HomeController extends Controller
 {
     public function index()
     {
-        [$tabs,$activeTab]=$this->tabsDetails();
-        return view('welcome',compact('tabs','activeTab'));
+        [$tabs, $activeTab] = $this->tabsDetails();
+        return view('welcome', compact('tabs', 'activeTab'));
     }
 
 
@@ -40,9 +40,16 @@ class HomeController extends Controller
             [
                 'name' => 'Design patterns',
                 'links' => [
-                    ['link' => '/design-patterns', 'page' => 'Pregătire de interviu'],
-                    ['link' => '/structural-patterns', 'page' => 'Structural Patterns'],
-                ]
+                    ['link' => '/design-patterns', 'page' => 'Introducere în design patterns'],
+                ],
+                'sections' => [
+                    ['name' => 'Deisgn patternuri creaționale',
+                        'links' => [
+                            ['link' => '/factory-pattern', 'page' => 'Factory pattern'],
+                            ['link' => 'singleton-pattern', 'page' => 'Singleton pattern'],
+                        ]
+                    ]
+                ],
             ],
             [
                 'name' => 'Baze de date',
@@ -53,6 +60,6 @@ class HomeController extends Controller
             ],
         ];
         $activeTab = 0; // Default active tab
-        return [$tabs,$activeTab];
+        return [$tabs, $activeTab];
     }
 }
