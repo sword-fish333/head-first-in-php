@@ -9,6 +9,7 @@ use App\Http\Controllers\SOLIDController;
 use App\Http\Controllers\CodeExecutionController;
 use App\Http\Controllers\DesignPatternsController;
 use App\Http\Controllers\CreationalDesignPatternsController;
+use App\Http\Controllers\ServicesAndLibrariesController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('oop-foundation', [OopFoundationController::class, 'index']);
 Route::get('deep-dive-procedural', [OopFoundationController::class, 'deepDiveProcedural']);
@@ -20,6 +21,7 @@ Route::get('solid-principles',[SOLIDController::class,'index']);
 Route::get('design-patterns',[DesignPatternsController::class,'index']);
 Route::get('factory-pattern',[CreationalDesignPatternsController::class,'factoryPattern']);
 Route::get('singleton-pattern',[CreationalDesignPatternsController::class,'singletonPattern']);
+Route::get('rabbitmq',[ServicesAndLibrariesController::class,'rabbitMq']);
 
 Route::get('concrete-implementation-1', function (\App\Services\AbstractContractInterface $binding) {
     dd($binding->handle());

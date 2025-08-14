@@ -58,6 +58,12 @@ class HomeController extends Controller
                     ['link' => '/cap-theorem', 'page' => 'Teorema CAP'],
                 ]
             ],
+            [
+                'name' => 'Servicii & Librării',
+                'links' => [
+                    ['link' => '/rabbitmq', 'page' => 'RabbitMQ'],
+                ]
+            ],
         ];
         $activeTab = 0; // Default active tab
         return [$tabs, $activeTab];

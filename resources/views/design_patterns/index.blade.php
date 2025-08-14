@@ -162,8 +162,7 @@ private - Accesibil doar din interiorul clasei care l-a definit.'>modificatori d
                         dependency injection) și implementări spefice de OOP.
                     </li>
                 </x-list>
-                <p class="font-semibold mt-4">Exemplu:</p>
-
+                <x-list_title title="Exemplu:"/>
                 <x-code_snippet>
                     // PHP 8 constructor property promotion reduces boilerplate
                     class OrderService {
@@ -186,11 +185,235 @@ private - Accesibil doar din interiorul clasei care l-a definit.'>modificatori d
                     }
                 </x-code_snippet>
                 <x-line/>
-                <p>Introducerea <b>Composer și a autoloading-ului PSR-4</b> a îmbunătățit semnificativ gestionarea
+                <p class="indent-5">Introducerea <b>Composerului și a autoloading-ului PSR-4</b> a îmbunătățit
+                    semnificativ gestionarea
                     dependențelor, făcând
-                    implementările de pattern-uri ușor de împărtășit și de întreținut. Developerii PHP moderni pot acum
+                    implementările de pattern-uri ușor de dat la alți developeri și de întreținut. Developerii PHP
+                    moderni pot acum
                     implementa design pattern-uri sofisticate cu aceeași eleganță găsită în limbajele tradițional
                     orientate pe obiecte.</p>
+            </x-info_box>
+        </section>
+        <section id="laravel_implementation">
+            <x-info_box>
+
+                <x-main_title class="mt-4" title="Implementarea sofisticată a design patternurilor din Laravel"/>
+                <p class="indent-5">Laravel demonstrează aplicarea eficientă a design patternurilor, combinând modelele
+                    tradiționale GoF cu
+                    nevoile moderne de dezvoltare web. Arhitectura framework-ului arată cum design patternurile pot fi
+                    adaptate și
+                    extinse pentru dezvoltarea optimă a aplicațiilor web.</p>
+                <x-line/>
+                <p><b>Containerul de Servicii</b> din Laravel reprezintă o implementare sofisticată a
+                    modului în care se realizează injecția de dependențe, rezolvând automat dependențele claselor prin
+                    <span class="extra-info"
+                          data-info='Reflecția în PHP este un mecanism nativ, încorporat care permite examinarea și manipularea de elemente ale codului (clase, metode, proprietăți, funcții) la runtime.'>reflecție</span>
+                    în timp ce suportă diverse
+                    strategii de relaționare între clase.</p>
+                <x-list_title class="mt-1" title="Exemplu:"/>
+                <x-code_snippet>
+                    // Automatic dependency injection
+                    class UserController extends Controller {
+                    public function __construct(
+                    protected UserService $userService,
+                    protected EmailService $emailService
+                    ) {}
+                    }
+
+                    // Custom binding in service provider
+                    $this->app->bind(PaymentProcessor::class, StripePaymentProcessor::class);
+
+                    // Singleton binding for expensive services
+                    $this->app->singleton(CacheManager::class, function (Application $app) {
+                    return new CacheManager($app->make('redis'));
+                    });
+                </x-code_snippet>
+                <x-line/>
+                <p><b>Facades</b> în Laravel oferă o abordare unică a implementării design patternului
+                    facades. În loc să
+                    încapsuleze logică complexă pur și simplu, Facades în Laravel acționează ca <span class="extra-info"
+                                                                                                      data-info='Proxy-urile statice sunt obiecte care oferă o interfață statică pentru funcționalități "non-statice",
+                                                                                                  permițând apelarea de metode ca și cum ar fi statice, când de fapt apelează metode ale instanței unei clase. Proxy-urile statice fac legătura dintre sintaxa statică convențională și designul flexibil din OOP.'>"proxy-uri statice(static proxies)"</span>
+                    la
+                    instanțe de servicii din <b>service container</b>, păstrând sintaxa asemănătoare metodelor statice
+                    și
+                    optimizând în același timp testabilitatea.</p>
+                <x-list_title class="mt-1" title="Exemplu:"/>
+                <x-code_snippet>
+                    class Cache extends Facade {
+                    protected static function getFacadeAccessor(): string {
+                    return 'cache';
+                    }
+                    }
+
+                    // Usage looks static but resolves to container instance
+                    Cache::get('user.123'); // Fully mockable and testable
+                </x-code_snippet>
+                <x-line/>
+                <p>Sistemul de evenimente din Laravel implementează design patternul <b>Observer</b> pentru
+                    comunicarea decuplată între componentele aplicației.</p>
+                <x-list_title class="mt-1" title="Exemplu:"/>
+                <x-code_snippet>
+                    // Event class
+                    class UserRegistered {
+                    use Dispatchable, SerializesModels;
+
+                    public function __construct(public User $user) {}
+                    }
+
+                    // Multiple listeners can observe the same event
+                    class SendWelcomeEmail {
+                    public function handle(UserRegistered $event): void {
+                    Mail::to($event->user)->send(new WelcomeEmail($event->user));
+                    }
+                    }
+
+                    class UpdateAnalytics {
+                    public function handle(UserRegistered $event): void {
+                    Analytics::track('user_registered', $event->user->toArray());
+                    }
+                    }
+                </x-code_snippet>
+                <x-line/>
+                <p>Modelele Factory din Laravel implementează design patternul Factory pentru generarea de
+                    date de testare, integrându-se cu biblioteca Faker pentru date realiste.</p>
+                <x-list_title class="mt-1" title="Exemplu:"/>
+                <x-code_snippet>
+                    class UserFactory extends Factory {
+                    protected $model = User::class;
+
+                    public function definition(): array {
+                    return [
+                    'name' => fake()->name(),
+                    'email' => fake()->unique()->safeEmail(),
+                    'password' => Hash::make('password'),
+                    ];
+                    }
+
+                    public function admin(): Factory {
+                    return $this->state(fn (array $attributes) => [
+                    'is_admin' => true,
+                    ]);
+                    }
+                    }
+
+                    // Usage
+                    User::factory()->count(50)->create();
+                    User::factory()->admin()->create();
+                </x-code_snippet>
+            </x-info_box>
+        </section>
+        <section id="balancing_benefits_and_tradeoffs">
+            <x-info_box>
+                <x-main_title class="mt-4" title="Beneficii și compromisuri în utilizarea design patternurilor"/>
+                <p class="indent-5 mt-3">Design patternurile oferă avantaje convingătoare, dar necesită aplicare
+                    judicioasă. Beneficiile
+                    principale includ îmbunătățirea reutilizabilității codului, mentenabilitatea sporită și colaborarea
+                    mai bună în echipă prin vocabularul comun. Modelele promovează separarea preocupărilor, făcând
+                    sistemele complexe mai ușor de gestionat și reducând cuplarea între componente.</p>
+                <p class="indent-5">Beneficiile colaborative sunt deosebit de semnificative. Când developerii
+                    menționează „Factory" sau
+                    „Observer", echipele înțeleg imediat structura arhitecturală, reducând costurile de comunicare și
+                    accelerând revizuirile de cod. Pattern-urile servesc ca documentație implicită, făcând deciziile
+                    arhitecturale clare pentru viitorii developeri.</p>
+                <p class="indent-5">Beneficiile colaborative sunt deosebit de semnificative. Când developerii
+                    menționează „Factory" sau
+                    „Observer", echipele înțeleg imediat structura arhitecturală, reducând costurile de comunicare și
+                    accelerând revizuirile de cod. Pattern-urile servesc ca documentație implicită, făcând deciziile
+                    arhitecturale clare pentru viitorii developeri.</p>
+                <p class="indent-5">Cu toate acestea, pattern-urile vin cu compromisuri semnificative. <b>"Over-engineering"</b>
+                    reprezintă cea mai
+                    comună capcană. Adică aplicarea unor pattern-uri sofisticate la probleme simple creează complexitate
+                    inutilă. Însuși Gang of Four au avertizat împotriva dogmatizării design pattern-urilor, subliniind
+                    că
+                    pattern-urile ar trebui să rezolve probleme reale, nu să demonstreze cunoștințe tehnice.</p>
+                <x-list_title class="mt-3" title="Indicații esențiale pentru utilizarea design patternurilor:"/>
+                <x-list>
+                    <li>Design patternurile trebuie folosite când complixitatea justifică abstracția</li>
+                    <li>Evitați design patterns pentru funcționalități simple și directe</li>
+                    <li>Luați în considerare expertiza echipei - nu implementați modele pe care echipa nu le înțelege
+                    </li>
+                    <li>Prioritizează codul clar și ușor de întreținut în detrimentul purității modelului</li>
+                    <li>Evaluarea implicațiilor de performanță în implementările de cod critice</li>
+                </x-list>
+                <x-important_info>
+                    PHP-ul modern s-a orientat către injecția de dependențe în locul
+                    Singleton-urilor, sisteme de evenimente în locul implementărilor directe de Observer și abstracții
+                    furnizate de framework-uri în locul implementărilor customizate de pattern-uri."
+                </x-important_info>
+            </x-info_box>
+        </section>
+        <section id="design_patterns_in_mature_php">
+            <x-info_box>
+                <x-main_title class="mt-4" title="Importanța design patternuri-lor în maturizarea PHP-ului"/>
+                <p class="indent-5">
+                    Evoluția PHP-ului de la programare procedurală la programare orientată pe obiecte a creat atât
+                    oportunități, cât și necesitate pentru adoptarea pattern-urilor de design. PHP-ul timpuriu nu avea
+                    caracteristicile de limbaj necesare pentru pattern-uri arhitecturale sofisticate. Îi lipsea
+                    încapsulare
+                    corespunzătoare, era fără interfețe și cu mecanisme limitate de reutilizare a funcționalităților.
+                </p>
+                <p class="indent-5">
+                    Pe măsură ce aplicațiile PHP au crescut în complexitate și au depășit simpla fază de scripturi
+                    pentru website-uri către sisteme la nivel enterprise, dezvoltatorii au avut nevoie de abordări
+                    arhitecturale mai bune. Introducerea OOP-ului corespunzător în PHP 5.0 a coincis cu cererea
+                    crescândă pentru aplicații PHP ușor de întreținut și scalabile.
+                </p>
+                <p class="indent-5">Framework-urile PHP au condus adoptarea pattern-urilor demonstrând implementări
+                    elegante. Symfony a
+                    fost pionier în implementarea <b>dependency injection containers</b>, Laravel a popularizat
+                    pattern-urile facade
+                    expresive, iar Doctrine a introdus pattern-uri ORM sofisticate. Aceste framework-uri au
+                    arătat developerilor PHP cum pattern-urile pot rezolva probleme din lumea reală menținând în
+                    același timp un code base lizibil și "developer friendly".</p>
+                <x-line/>
+
+                <p class="indent-5">
+                    <b>Ecosistemul Composer</b> a accelerat standardizarea pattern-urilor prin interfețele PSR (PHP
+                    Standards
+                    Recommendation). PSR-11 a standardizat interfețele containerelor, PSR-3 a definit interfețele de
+                    logging, iar PSR-7 a stabilit interfețele pentru mesaje HTTP. Aceste standarde au permis
+                    implementări de pattern-uri interoperabile între diferite framework-uri și biblioteci.
+                </p>
+                <p class="indent-5">
+                    <span class="extra-info"
+                          data-info='Sistemul de tipuri PHP definește modul în care variabilele stochează și interacționează cu diferite tipuri de date. Acesta a evoluat semnificativ de la tipuri de date implicite, dinamice, la tipuri de date statice explicite.'>Sistemul de tipuri(type system) al PHP-ului</span>
+                    modern permite implementări de pattern-uri care anterior erau
+                    imposibile sau nesigure. <b>Promovarea proprietăților în constructor(Constructor property
+                        promotion)</b> reduce codul boilerplate,
+                    atributele permit pattern-uri conduse de metadate, iar tipurile union oferă API-uri flexibile.
+                    Aceste caracteristici fac implementarea pattern-urilor mai naturală și mai ușor de întreținut ca
+                    niciodată.
+                </p>
+            </x-info_box>
+        </section>
+        <section id="conclusion">
+            <x-info_box>
+                <x-main_title class="mt-4" title="Concluzie"/>
+                <p class="indent-5">Pattern-urile de design au evoluat de la perspectivele arhitecturale ale lui
+                    Christopher Alexander în instrumente esențiale pentru dezvoltarea PHP modernă.
+                    Implementările sofisticate de pattern-uri din Laravel demonstrează cum conceptele tradiționale de
+                    inginerie software pot fi adaptate pentru aplicațiile web contemporane, oferind atât eleganță
+                    structurală, cât și soluții practice.</p>
+                <p class="indent-5">Transformarea PHP de la scripturi procedurale la un limbaj care suportă OOP robust a permis
+                    această revoluție a pattern-urilor. Caracteristicile moderne ale limbajului precum <b>namespace-urile</b>,
+                    <b>trait-urile</b>, <b>declarațiile de tip(type declarations)</b> și atributele oferă fundația
+                    pentru implementări elegante de
+                    pattern-uri care erau imposibile în versiunile timpurii de PHP.</p>
+                <x-line/>
+                <p class="indent-5">Înțelegerea pattern-urilor de design, originile lor, beneficiile, compromisurile și
+                    aplicațiile adecvate—a devenit esențială pentru developerii PHP care vor să construiască aplicații ușor de
+                    întreținut. Succesul Laravel-ului arată cum aplicarea atentă a pattern-urilor poate crea framework-uri
+                    prietenoase pentru developeri care scalează de la website-uri simple la aplicații enterprise.</p>
+                <p class="indent-5">
+                    Perspectiva cheie este că pattern-urile sunt instrumente, nu scopuri în sine. Aplicate cu
+                    discernământ
+                    pentru a rezolva probleme reale, care îmbunătățesc calitatea codului și colaborarea în echipă.
+                    Aplicate dogmatic sau prematur, ele creează complexitate inutilă. Cei mai buni dvevoperi PHP
+                    înțeleg atât când să folosească pattern-uri, cât și când soluțiile mai simple sunt suficiente. Ei
+                    valorifică bogatul ecosistem de pattern-uri pe care PHP-ul modern și framework-urile precum
+                    Laravel îl oferă, menținând în același timp focusul pe cod practic și mentenabil care satisface nevoile clienților.
+                </p>
             </x-info_box>
         </section>
     </div>

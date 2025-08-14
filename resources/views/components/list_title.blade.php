@@ -1,1 +1,1 @@
-<h4 class="text-lg mt-4">{{$title}}</h4>
+<h4 {{ $attributes->merge(['class' => 'text-lg']) }}>{{$title}}</h4>
