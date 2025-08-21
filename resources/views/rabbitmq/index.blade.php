@@ -110,11 +110,83 @@
                         info="Protocol AMQP 0-9-1 este versiunea specifică a protocolului AMQP folosită de RabbitMQ, care definește exact regulile și formatele pentru schimbul de mesaje (cum sunt structurate, rutate, confirmate și transmise) între client și broker."
                         concept="Protocolul AMQP 0-9-1"/>
                     multiplexează canale multiple prin conexiuni TCP individuale, reducând
-                    utilizarea resurselor și overhead-ul de conectare. Fiecare <x-extra_info
+                    utilizarea resurselor și overhead-ul de conectare. Fiecare
+                    <x-extra_info
                         info="Cadru de date al protocolului este pachetul elementar de date trimis prin conexiunea TCP, conform specificației AMQP. Fiecare frame conține informații pentru un anumit canal (marcat prin channel ID) și poate transporta comenzi, headere sau bucăți de mesaj."
-                        concept="cadru de date al protocolului"/>poartă un ID de canal pentru rutare, permițând izolarea completă între canale în timp ce se
+                        concept="cadru de date al protocolului"/>
+                    poartă un ID de canal pentru rutare, permițând izolarea completă între canale în timp ce se
                     partajează resursele de conexiune. Hosturile virtuale asigură separare logică cu
                     stocare de mesaje independente și tabele de rutare.
+                </p>
+            </x-info_box>
+        </section>
+        <section id="exchange_types" class="scroll-mt-20">
+            <x-info_box>
+                <x-main_title class="mb-4"
+                              title="Tipurile de exchange-uri determină complexitatea de rutare și caracteristicile de performanță"/>
+                <x-list>
+                    <li><b>Exchange-uri directe</b>&nbsp;oferă performanță de căutare hash O(1) folosind potriviri
+                        exacte ale cheii
+                        de rutare, făcându-le optime pentru scenarii cu randament înalt de date. Schimbul implicit
+                        special fără nume leagă automat toate cozile cu cheia de rutare egală cu numele cozii,
+                        simplificând modelele de rutare de bază ale mesajelor.
+                    </li>
+                    <li><b>Topic exchanges</b> permit potriviri sofisticate de tipar cu wildcard-uri, dar implică
+                        costuri de
+                        performanță semnificative. Wildcard-ul * se potrivește exact cu un singur cuvânt, iar # se
+                        potrivește cu zero sau mai multe cuvinte. Wildcard-urile de tip hash au un impact deosebit
+                        asupra performanței, de aceea sistemele de producție ar trebui să minimizeze utilizarea lor și
+                        să proiecteze cu atenție ierarhiile cheilor de rutare.
+                    </li>
+                    <li><b>Fanout exchanges</b> oferă cea mai mare performanță prin difuzarea mesajelor către toate
+                        cozile
+                        legate, indiferent de cheia de rutare. Acest lucru le face ideale pentru broadcast de
+                        evenimente, actualizări live și sisteme de notificare unde toți cei înregistrați trebuie să
+                        primească
+                        mesaje identice.
+                    </li>
+                    <li><b>Headers exchanges</b> oferă cea mai mare flexibilitate în rutare prin potrivirea header-elor
+                        mesajelor
+                        folosind argumentele x-match. Acestea suportă modul „all” (toate header-elor trebuie să se
+                        potrivească) și modul „any” (este suficientă potrivirea unui singur antet), plus tipuri de date
+                        complexe dincolo de simple șiruri. Totuși, ele sunt cea mai costisitoare opțiune de rutare din
+                        cauza consumului de resurse produs de comparația header-elor.
+                    </li>
+                    <li>Legăturile între <b>exchange-uri</b>(exchange-to-exchange bindings) permit topologii de rutare
+                        complexe și tipare de procesare a mesajelor în mai multe etape. RabbitMQ previne buclele de
+                        rutare infinite prin detecția ciclurilor, dar permite arhitecturi sofisticate de flux al
+                        mesajelor.
+                    </li>
+                </x-list>
+            </x-info_box>
+        </section>
+        <section id="exchange_types" class="scroll-mt-20">
+            <x-info_box>
+                <x-main_title class="mb-4"
+                              title="Implementări specifice în PHP"/>
+                <p class="indent-5">Managementul de conexiuni reprezintă cel mai critic aspect al implementărilor RabbitMQ în PHP.
+                    Pattern-ul
+                    <x-extra_info info="O long-lived connection este o conexiune care rămâne deschisă pentru o perioadă lungă de timp și este reutilizată pentru multiple operații.
+Ea evită costul repetat al deschiderii și închiderii conexiunilor, îmbunătățind performanța și stabilitatea aplicație"
+                                  concept="long-lived connection"/>
+                    combinat cu multiplexarea de canale oferă performanță optimă, însă
+                    modelul
+                    <x-extra_info info="Modelul request–response în PHP înseamnă că fiecare script rulează doar ca răspuns la o cerere HTTP.
+La finalizarea răspunsului, procesul se încheie, iar resursele (inclusiv conexiunile) sunt închise."
+                                  concept="request–response"/>
+                    al PHP complică această abordare. În sistemele de producție se recomandă
+                    implementarea de
+                    <x-extra_info info="Connection pooling în PHP înseamnă menținerea unui set de conexiuni deschise reutilizabile între procese, în loc să se creeze o conexiune nouă pentru fiecare request.
+Astfel se reduce overhead-ul de creare/închidere a conexiunilor și se îmbunătățește performanța sistemului."
+                                  concept="connection pooling"/>
+                    sau utilizarea AMQProxy pentru a agrega conexiunile între
+                    procesele PHP.
+                </p>
+                <x-line/>
+                <p class="indent-5">
+                    Implementările de producer necesită configurarea de persistentă de mesaje împreună cu cozi și exchange-uri care persistă pentru a asigura garanții de fiabilitate. Publisher confirms validează
+                    acceptarea mesajelor de către broker, iar exception handling-ul corect gestionează eșecurile de
+                    conexiune și problemele de rețea.
                 </p>
             </x-info_box>
         </section>
