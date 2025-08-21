@@ -33,3 +33,34 @@ Route::get('concrete-implementation-2', function (\App\Services\AbstractContract
 
 // PHP Playground API endpoint
 Route::post('api/execute-code', [CodeExecutionController::class, 'execute']);
+
+Route::get('functional-programming',function (){
+
+    $arr=[
+      1=>[
+          'nested_array'=>[
+              'nested_key'=>[
+                  'value'=>3
+              ]
+          ]
+      ]
+    ];
+    $arr2=&$arr;
+    $arr2['nested_array']['nested_key']['value']=4;
+    dd($arr2,$arr);
+   $a=10;
+   $b=function()use($a){
+       return $a*10;
+   };
+    $counter = 0;
+    $increment = function() use (&$counter) {
+        return ++$counter;
+    };
+    $increment();
+
+    $typed=fn(int $x):int=>$x*2;
+   dd($typed(2));
+});
+Route::get('functional-programming-js',function (){
+  return view('functional_programming_js');
+});

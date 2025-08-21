@@ -9,7 +9,9 @@ class ServicesAndLibrariesController extends Controller
     public function rabbitMq()
     {
         view()->share('sections', [
-            ['section_id' => 'definition', 'section_name' => 'Definiție'],
+            ['section_id' => 'introduction', 'section_name' => 'Introducere'],
+            ['section_id' => 'history', 'section_name' => 'Istoric'],
+            ['section_id' => 'internal_architecture', 'section_name' => 'Arhitectură Internă'],
 
         ]);
         return view('rabbitmq.index');
