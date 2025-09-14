@@ -1505,8 +1505,9 @@ Author: Left4code
     <div class="tooltip-arrow absolute w-2 h-2 bg-gray-800 transform rotate-45"></div>
 </div>
 <x-progress_bar/>
-
+<x-navbar/>
 <x-sidebar :sections="$sections ??[]"/>
+<x-session_errors/>
 {{$slot}}
 <x-php-playground-modal/>
 
@@ -1568,6 +1569,22 @@ Author: Left4code
             }, 700);
         });
     }
+
+    function toggleLangDropdown(){
+        const dropdown = document.getElementById("lang_dropdown");
+        if(dropdown.classList.contains('hidden')){
+            dropdown.classList.remove('hidden')
+        return;
+        }
+        dropdown.classList.add('hidden')
+    }
+
+    document.addEventListener('click', (e) => {
+        const dropdown = document.getElementById('lang_dropdown');
+        if (!dropdown.classList.contains('hidden') && !e.target.closest('.relative')) {
+            dropdown.classList.add('hidden');
+        }
+    });
 </script>
 {!! $js ??'' !!}
 <script src="{{asset('js/general.js')}}"></script>

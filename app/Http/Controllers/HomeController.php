@@ -68,4 +68,13 @@ class HomeController extends Controller
         $activeTab = 0; // Default active tab
         return [$tabs, $activeTab];
     }
+
+    public function changeLang(): \Illuminate\Http\RedirectResponse
+    {
+        \request()->validate([
+            'lang'=>'required|string|in:en,ro'
+        ]);
+        session()->put('lang',\request('lang'));
+        return back()->with('success','Language has been changed successfully!');
+    }
 }

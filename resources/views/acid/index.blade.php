@@ -1,7 +1,7 @@
 <x-layout>
     <!-- Main Content -->
     <div class="container mx-auto py-10 lg:pl-72">
-        <x-page_header backRoute="/" title="Principiile ACID"/>
+        <x-page_header backRoute="/" title="{{__('frontend.acid.title')}}"/>
 
 
         <!-- Introduction Section -->

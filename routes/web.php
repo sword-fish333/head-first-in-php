@@ -10,7 +10,11 @@ use App\Http\Controllers\CodeExecutionController;
 use App\Http\Controllers\DesignPatternsController;
 use App\Http\Controllers\CreationalDesignPatternsController;
 use App\Http\Controllers\ServicesAndLibrariesController;
+use App\Http\Middleware\LocalizationMiddleware;
+Route::group(['middleware'=>LocalizationMiddleware::class],function (){
 Route::get('/', [HomeController::class, 'index']);
+    Route::get('change-lang', [HomeController::class, 'changeLang'])->name('change-lang');
+
 Route::get('oop-foundation', [OopFoundationController::class, 'index']);
 Route::get('deep-dive-procedural', [OopFoundationController::class, 'deepDiveProcedural']);
 Route::get('oop-example', [OopFoundationController::class, 'oopExample']);
@@ -22,7 +26,7 @@ Route::get('design-patterns',[DesignPatternsController::class,'index']);
 Route::get('factory-pattern',[CreationalDesignPatternsController::class,'factoryPattern']);
 Route::get('singleton-pattern',[CreationalDesignPatternsController::class,'singletonPattern']);
 Route::get('rabbitmq',[ServicesAndLibrariesController::class,'rabbitMq']);
-
+});
 Route::get('concrete-implementation-1', function (\App\Services\AbstractContractInterface $binding) {
     dd($binding->handle());
 });
