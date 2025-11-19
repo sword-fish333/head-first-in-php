@@ -59,9 +59,22 @@ class HomeController extends Controller
                 ]
             ],
             [
-                'name' => 'Servicii & Librării',
+                'name' => 'Algoritmi & structuri de date',
                 'links' => [
-                    ['link' => '/rabbitmq', 'page' => 'RabbitMQ'],
+                    ['link' => '/np-complete', 'page' => 'NP Complete'],
+                ]
+            ],
+            [
+                'name' => 'Soft skills & people skills',
+                'links' => [
+                    ['link' => '/software-engineering', 'page' => 'Inginer software'],
+                ]
+            ],
+            [
+                'name' => 'Cărți',
+                'links' => [
+                    ['link' => '/clean-code', 'page' => 'Clean Code - A Handbook of Agile
+Software Craftsmanship'],
                 ]
             ],
         ];
