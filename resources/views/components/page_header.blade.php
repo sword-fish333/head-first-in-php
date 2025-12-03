@@ -1,4 +1,4 @@
-<header class="flex items-center justify-center mb-10 relative">
+<header class="flex items-center justify-center @if(!isset($class) || !str_contains($class,'mb-')) mb-10 @endif {{$class ?? ''}} relative">
     <a href="{{$backRoute}}" class="absolute left-0 cursor-pointer group">
                 <span class="material-symbols-outlined text-blue-950 group-hover:text-blue-700 transition-colors">
                     arrow_back_ios
